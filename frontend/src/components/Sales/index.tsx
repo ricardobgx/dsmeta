@@ -5,13 +5,13 @@ import "react-datepicker/dist/react-datepicker.css";
 import SalesTable from "../SalesTable";
 
 const Sales: React.FC = (): JSX.Element => {
-  const defaultStartDate = new Date(
+  const defaultMinDate = new Date(
     new Date().setDate(new Date().getDate() - 15)
   );
-  const defaultEndDate = new Date();
+  const defaultMaxDate = new Date();
 
-  const [startDate, setStartDate] = useState(defaultStartDate);
-  const [endDate, setEndDate] = useState(defaultEndDate);
+  const [minDate, setMinDate] = useState(defaultMinDate);
+  const [maxDate, setMaxDate] = useState(defaultMaxDate);
 
   return (
     <section id="sales">
@@ -21,9 +21,9 @@ const Sales: React.FC = (): JSX.Element => {
           <div>
             <div className="dsmeta-form-control-container">
               <DatePicker
-                selected={startDate}
+                selected={minDate}
                 onChange={(date: Date) => {
-                  if (date <= endDate) setStartDate(date);
+                  if (date <= maxDate) setMinDate(date);
                 }}
                 className="dsmeta-form-control"
                 dateFormat="dd/MM/yyyy"
@@ -31,9 +31,9 @@ const Sales: React.FC = (): JSX.Element => {
             </div>
             <div className="dsmeta-form-control-container">
               <DatePicker
-                selected={endDate}
+                selected={maxDate}
                 onChange={(date: Date) => {
-                  setEndDate(date);
+                  setMaxDate(date);
                 }}
                 className="dsmeta-form-control"
                 dateFormat="dd/MM/yyyy"
