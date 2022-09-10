@@ -1,17 +1,29 @@
-import React, { useState } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-
 import SalesTable from "../SalesTable";
+import DatePicker from "react-datepicker";
+import React, { useEffect, useState } from "react";
+
+import ApiUtil from "../../utils/apiUtil";
+
+import "react-datepicker/dist/react-datepicker.css";
+import FormatterUtil from "../../utils/formatterUtil";
 
 const Sales: React.FC = (): JSX.Element => {
   const defaultMinDate = new Date(
-    new Date().setDate(new Date().getDate() - 15)
+    new Date().setDate(new Date().getDate() - 365)
   );
   const defaultMaxDate = new Date();
 
-  const [minDate, setMinDate] = useState(defaultMinDate);
-  const [maxDate, setMaxDate] = useState(defaultMaxDate);
+  const [minDate, setMinDate] = useState<Date>(defaultMinDate);
+  const [maxDate, setMaxDate] = useState<Date>(defaultMaxDate);
+
+  const [sales, setSales] = useState<Sale[]>([]);
+
+  useEffect(() => {
+    ApiUtil.getSales({
+      minDate: FormatterUtil.getISOUTCDateString(minDate),
+      maxDate: FormatterUtil.getISOUTCDateString(maxDate),
+    }).then((data) => setSales(data.content));
+  }, [minDate, maxDate]);
 
   return (
     <section id="sales">
@@ -42,7 +54,7 @@ const Sales: React.FC = (): JSX.Element => {
           </div>
 
           <div>
-            <SalesTable />
+            <SalesTable sales={sales} />
           </div>
         </div>
       </div>

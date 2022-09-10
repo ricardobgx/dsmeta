@@ -1,0 +1,3 @@
+interface SalesTableProps {
+  sales: Sale[];
+}

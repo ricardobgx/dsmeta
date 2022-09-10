@@ -30,7 +30,7 @@ public class SmsService {
 	public void sendSms(Long id) {
 		Sale sale = repository.findById(id).get();
 
-		String saleDate = sale.getDate().getDayOfMonth() + "/" + sale.getDate().getMonth() + "/" + sale.getDate().getYear();
+		String saleDate = sale.getDate().getDayOfMonth() + "/" + sale.getDate().getMonthValue() + "/" + sale.getDate().getYear();
 		
 		String messageContent = "O vendedor " + sale.getSellerName() + " foi destaque em " + saleDate + " com um total de R$" + String.format("%.2f", sale.getAmount());
 		
