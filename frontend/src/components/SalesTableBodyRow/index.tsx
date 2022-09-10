@@ -18,7 +18,10 @@ const SalesTableBodyRow: React.FC<Sale> = (props): JSX.Element => {
       <td>R$ {amount.toFixed(2)}</td>
       <td>
         <div className="dsmeta-red-btn-container">
-          <button className="dsmeta-red-btn">
+          <button
+            onClick={async () => await ApiUtil.notifyManager(id)}
+            className="dsmeta-red-btn"
+          >
             <img src={notificateIcon} alt="Notificar" />
           </button>
         </div>
