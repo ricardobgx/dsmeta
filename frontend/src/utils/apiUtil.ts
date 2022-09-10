@@ -22,7 +22,7 @@ const ApiUtil = {
         toast.info("SMS enviado com sucesso!");
       });
     } catch (err) {
-      toast.info("Falha ao enviar SMS!");
+      toast.error("Falha ao enviar SMS!");
       throw new Error((err as Error).message);
     }
   },
